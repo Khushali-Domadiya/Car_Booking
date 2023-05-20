@@ -1,0 +1,104 @@
+{% load static%}
+{% include 'header_admin.html'%}
+            <!-- Form Start -->
+            {% if form.errors %}
+            {% for error in form.errors%}
+    <p>{{error}}</p>
+            {%endfor%}
+            
+            {% endif %}
+            <div class="container-fluid pt-4 px-4">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token%}
+                    <div class="row g-4">
+                        <div class="col-sm-12 col-xl-12">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Add Cars</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="name" value="{{data.name}}" id="floatingInput" placeholder="Car Name">
+                                    <label for="floatingInput">Car Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" value="{{data.prize}}" id="floatingPassword" placeholder="Prize" name="prize">
+                                    <label for="floatingPassword">Prize</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" value="{{data.discription}}" id="floatingPassword" placeholder="Description" name="discription">
+                                    <label for="floatingPassword">description</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="category" id="floatingSelect" aria-label="Floating label select example">
+                                        {% for i in cat%}
+                                            <option value="{{i.id}}">{{i.name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                    <label for="floatingSelect">Car Category</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="car_brand" id="floatingSelect" aria-label="Floating label select example">
+                                        {% for i in brd%}
+                                            <option value="{{i.id}}">{{i.name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                    <label for="floatingSelect">Car Category</label>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="file" id="formFile" name="image" value="{{data.image}}">
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" value="{{data.person}}" class="form-control" name="person" id="floatingPassword" placeholder="description" min="1" max="7">
+                                    <label for="floatingPassword">Persons</label>
+                                </div>
+                                <div class="form-floating mb-3"> For Music : 
+                                    Music : <input type="radio" class="form-check-input" name="music" value="Music">
+                                    Without-Music : <input type="radio" class="form-check-input" name="music" value="Without-Music">
+                                </div>
+                                <div class="form-floating mb-3"> Ac Type : 
+                                    AC : <input type="radio" class="form-check-input" name="ac" value="AC">
+                                    Non-AC : <input type="radio" class="form-check-input" name="ac" value="Non-AC">
+                                </div>
+                                <div class="form-floating mb-3">Fuel Type :
+                                    Petrol : <input type="radio" class="form-check-input" name="fuel" value="Petrol">
+                                    Diesel : <input type="radio" class="form-check-input" name="fuel" value="Diesel">
+                                </div>
+                                <input type="submit" class="btn btn-primary" name="save"> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Form End -->
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">ROYAL CARS</a>, All Right Reserved. 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/chart/chart.min.js'%}"></script>
+    <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js'%}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js'%}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js'%}"></script>
+    
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js'%}"></script>
+    </body>
+    
+    </html>
