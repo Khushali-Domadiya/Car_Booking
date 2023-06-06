@@ -1,0 +1,156 @@
+{% load static%}
+{% include 'header.html'%}
+    <!-- Detail Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pt-5">
+            <div class="row">
+                {% if car_data%}
+                    {% for car in car_data%}
+                    <div class="col-lg-8 mb-5">
+                        <h1 class="display-4 text-uppercase mb-5">{{car.name}}</h1>
+                        <div class="row mx-n2 mb-3">
+                            <div class="col-md-3 col-6 px-2 pb-2">
+                                <img class="img-fluid w-100" src="/media/{{car.image}}" alt="">
+                            </div>
+                        </div>
+                        <p>{{car.discription}}</p>
+                        <div class="row mt-n3 mt-lg-0 pb-4">
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-car text-primary mr-2"></i>
+                                <span>Name : {{car.name}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-rupee-sign text-primary mr-2"></i>
+                                <span>Prize : {{car.prize}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-car-side text-primary mr-2"></i>
+                                <span>Category : {{car.category}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-car text-primary mr-2"></i>
+                                <span>Brand : {{car.car_brand}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-user text-primary mr-2"></i>
+                                <span>Person : {{car.person}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-music text-primary mr-2"></i>
+                                <span>Music : {{car.music}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-wind text-primary mr-2"></i>
+                                <!-- <i class="fa-solid fa-temperature-arrow-down text-primary mr-2"></i> -->
+                                <span>AC : {{car.ac}}</span>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <i class="fa fa-gas-pump text-primary mr-2"></i>
+                                <span>Fuel : {{car.fuel}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                {%else%}
+                    {{msg}}
+                {%endif%}
+                <div class="col-lg-4 mb-5">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token%}
+                        <div class="bg-secondary p-5">
+                            <h3 class="text-primary text-center mb-4">Check Availability</h3>
+                            <div class="form-group">
+                                <select class="custom-select px-4" style="height: 50px;">
+                                    <option selected>Pickup Location</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Ahmedabad">Ahmedabad</option>
+                                    <option value="Vadodara">Vadodara</option>
+                                    <option value="Gandhinagar">Gandhinagar</option>
+                                    <option value="Navsari">Navsari</option>
+                                    <option value="Vapi">Vapi</option>
+                                    <option value="Bharuch">Bharuch</option>
+                                    <option value="Amreli">Amreli</option>
+                                    <option value="Bhavanagar">Bhavanagar</option>
+                                    <option value="Dwarka">Dwarka</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select px-4" style="height: 50px;">
+                                    <option selected>Drop Location</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Ahmedabad">Ahmedabad</option>
+                                    <option value="Vadodara">Vadodara</option>
+                                    <option value="Gandhinagar">Gandhinagar</option>
+                                    <option value="Navsari">Navsari</option>
+                                    <option value="Vapi">Vapi</option>
+                                    <option value="Bharuch">Bharuch</option>
+                                    <option value="Amreli">Amreli</option>
+                                    <option value="Bhavanagar">Bhavanagar</option>
+                                    <option value="Dwarka">Dwarka</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="date" id="date1" data-target-input="nearest">
+                                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Date"
+                                        data-target="#date1" data-toggle="datetimepicker" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="time" id="time1" data-target-input="nearest">
+                                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
+                                        data-target="#time1" data-toggle="datetimepicker" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select px-4" style="height: 50px;">
+                                    <option selected>Select Person</option>
+                                    <option value="1">Person 1</option>
+                                    <option value="2">Person 2</option>
+                                    <option value="3">Person 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0">
+                                <!-- <button class="btn btn-primary btn-block" type="submit" style="height: 50px;">Check Now</button> -->
+                                <input type="submit" name="check" value="Check Now" class="btn btn-primary btn-block" style="height: 50px;">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Detail End -->
+
+
+    <!-- Related Car Start -->
+    <div class="container-fluid pb-5">
+        <div class="container pb-5">
+            <h2 class="mb-4">Related Cars</h2>
+            <div class="owl-carousel related-carousel position-relative" style="padding: 0 30px;">
+                {% for car in all_car%}
+                    <div class="rent-item">
+                        <img class="img-fluid mb-4" src="/media/{{car.image}}" alt="">
+                        <h4 class="text-uppercase mb-4">{{car.name}}</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="px-2">
+                                <i class="fa fa-user text-primary mr-1"></i>
+                                <span>{{car.person}}</span>
+                            </div>
+                            <div class="px-2 border-left border-right">
+                                <i class="fa fa-gas-pump text-primary mr-1"></i>
+                                <span>{{car.fuel}}</span>
+                            </div>
+                            <div class="px-2">
+                                <i class="fa fa-music text-primary mr-1"></i>
+                                <span>{{car.music}}</span>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary px-3" href="/details_car/{{car.id}}">Rs.{{car.prize}}/Day</a>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <!-- Related Car End -->
+    {% include 'footer.html'%}
+</html>

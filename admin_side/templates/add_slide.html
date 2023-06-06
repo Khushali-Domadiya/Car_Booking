@@ -7,16 +7,16 @@
         <div class="bg-light rounded h-100 p-4">
             <h6 class="mb-4">Add Team</h6>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" name="title" placeholder="name@example.com">
+                <input type="text" value="{{data.title}}" class="form-control" id="floatingInput" name="title" placeholder="Name of Slide">
                 <label for="floatingInput">Title</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" name="discription" placeholder="name@example.com">
+                <input type="text" value="{{data.discription}}" class="form-control" id="floatingInput" name="discription" placeholder="name@example.com">
                 <label for="floatingInput">Discription</label>
             </div>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="formFile" name="image">
+                <input class="form-control" type="file" id="formFile" name="image" value="{{data.image}}">
             </div>
             <input type="submit" class="btn btn-primary" name="save" value="SAVE"></input>
         </div>

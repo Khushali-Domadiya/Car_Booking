@@ -63,8 +63,14 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/myadmin/dashboard/" class="nav-item nav-link active"><i
-                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/myadmin/dashboard/" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Slide</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="/myadmin/add_slide/" class="dropdown-item">Add Slide</a>
+                            <a href="/myadmin/manage_slide/" class="dropdown-item">Manage Slide</a>
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-laptop me-2"></i>Car Category</a>
@@ -92,6 +98,24 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="/myadmin/add_team/" class="dropdown-item">Add Team</a>
                             <a href="/myadmin/manage_team/" class="dropdown-item">Manage Team</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Review</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="/myadmin/manage_review/" class="dropdown-item">Manage Review</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Contact</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="/myadmin/manage_contact/" class="dropdown-item">Manage Contact</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Contact</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="/myadmin/manage_contact/" class="dropdown-item">Manage User</a>
                         </div>
                     </div>
                 </div>
@@ -184,7 +208,7 @@
                             <span class="d-none d-lg-inline-flex">{{row.name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="/myadmin/my_profile/" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <a href="/myadmin/log_out_admin/" class="dropdown-item">Log Out</a>
                         </div>

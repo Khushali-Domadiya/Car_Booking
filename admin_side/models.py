@@ -57,8 +57,20 @@ class car(models.Model):
     ac = models.CharField(max_length=50)
     fuel = models.CharField(max_length=50)
     image = models.FileField(upload_to='./car_image/', default='')
+    def __str__(self) -> str:
+        return self.name
 
 class CAR(ModelForm):
     class Meta :
         model = car
         fields = ['name', 'prize', 'discription', 'category','car_brand', 'person', 'music', 'ac', 'fuel', 'image']
+
+class slide(models.Model):
+    title = models.CharField(max_length=50)
+    discription = models.CharField(max_length=200)
+    image = models.FileField(upload_to='./slide',default='')
+
+class SLIDE(ModelForm):
+    class Meta:
+        model = slide
+        fields = ['title','discription','image']

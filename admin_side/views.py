@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from car_rent import settings
 # from admin_side.models import sign_up,SIGN_UP,team,TEAM,car_category,CAR_CATEGORY
 from admin_side.models import *
+from frontend.models import *
 
 # Create your views here.
 
@@ -12,9 +13,11 @@ def dashboard(request):
         row = sign_up.objects.filter(id=request.session['admin_id']).get()
     else:
         return redirect('/myadmin/sign_in/')
-
-    return render(request, 'dashboard.html', {'row': row})
-
+    slide_count = slide.objects.count()
+    car_category_count = car_category.objects.count()
+    car_brand_count = brand.objects.count()
+    car_count = car.objects.count()
+    return render(request, 'dashboard.html', {'row': row,'slide_count':slide_count,'car_category_count':car_category_count,'car_brand_count':car_brand_count,'car_count':car_count})
 
 def sign_in_admin(request):
     msg = ''
@@ -102,8 +105,6 @@ def delete_team(request, delt):
     data = team.objects.filter(id=delt).delete()
     return redirect('/myadmin/manage_team')
 
-def add_slide(request):
-    return render(request, 'add_slide.html')
 
 def add_category(request):
     row = ''
@@ -222,3 +223,70 @@ def update_car(request,edit):
 def delete_car(request,delt):
     data = car.objects.filter(id=delt).delete()
     return redirect('/myadmin/manage_car')
+
+def add_slide(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    if 'save' in request.POST:
+        sld = SLIDE(request.POST,request.FILES)
+        sld.save()
+    return render(request, 'add_slide.html',{'row':row})
+
+def manage_slide(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    data = slide.objects.all()
+    return render(request,'manage_slide.html',{'row':row,'data':data})
+
+def update_slide(request,edit):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    data = slide.objects.filter(id=edit).get()
+    if 'save' in request.POST:
+        frm = SLIDE(request.POST,request.FILES,instance=data)
+    return render(request,'add_slide.html',{'row':row,'data':data})
+
+def delete_slide(request,delt):
+    data = slide.objects.filter(id=delt).delete()
+    return redirect('/myadmin/manage_slide')
+
+def my_profile(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+        
+    else:
+        return redirect('/myadmin/sign_in')
+    data = sign_up.objects.filter(id=request.session['admin_id']).all()
+    return render(request,'myprofile.html',{'row':row,'data':data})
+
+def manage_review(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    data = review.objects.all()
+    return render(request,'manage_review.html',{'row':row,'data':data})
+
+def manage_contact(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    data = contact.objects.all()
+    return render(request,'manage_contact.html',{'row':row,'data':data})
+
+def manage_user(request):
+    data = signup.objects.all()
+    return render(request,'manage_user.html',{'data':data})
