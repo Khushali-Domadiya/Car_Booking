@@ -27,6 +27,10 @@ def home(request):
     tem = team.objects.all()
     brd = brand.objects.all()
     all_review = review.objects.all()
+    # if 'search' in request.POST:
+        # search = request.POST['search']
+        # data = car.objects.filter(name__contains=search).all()
+        
     return render(request,'index.html',{'row':row,'msg':msg,'sld':sld,'all_car':all_car,'tem':tem,'brd':brd,'all_review':all_review})
 
 def about(request):
@@ -275,11 +279,16 @@ def search_car(request):
     if 'save' in request.POST:
         car_name = request.POST['car_name']
         car_data = car.objects.filter(id=car_name).all()
-        # check_car = request.session['car_data']
-    
     msg = 'No Data Shown'
     all_car = car.objects.all()
     brd = brand.objects.all()
+    # if 'check' in request.POST:
+    #     pickup_date = request.POST['pickup_date']
+    #     pickup_time = request.POST['pickup_time']
+        # car_name = request.POST['car_name']
+        # car_data = car.objects.filter(id=car_name).all()
+        # if pickup_time == pickup_time:
+        #     return redirect('/')
     return render(request,'search_car.html',{'car_data':car_data,'all_car':all_car,'msg':msg,'brd':brd,'same_car':same_car,'row':row})
 
 def brand_car(request,brand_id):
@@ -297,7 +306,6 @@ def change_password(request):
     if 'user_id' in request.session:
         row = signup.objects.filter(id=request.session['user_id']).get()
     if 'save' in request.POST:
-        # email = request.POST['email']
         old_password = request.POST['old_password']
         new_password = request.POST['new_password']
         conf_password = request.POST['conf_password']
@@ -311,4 +319,5 @@ def change_password(request):
                 msg = 'New Password and confirm Password Doesnot match'
         else:
             msg = 'Invalid Old Password'
-    return render(request,'change_password.html',{'row':row,'msg':msg})
+    brd = brand.objects.all()
+    return render(request,'change_password.html',{'row':row,'msg':msg,'brd':brd})

@@ -51,9 +51,11 @@ class review(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     message = models.CharField(max_length=500)
+    profession = models.CharField(max_length=100)
     image = models.FileField(upload_to='./review_image',default='')
 
 class REVIEW(ModelForm):
     class Meta:
         model = review
-        fields = ['name','email','message','image']
+        # fields = ['name','email','message','image']
+        fields = "__all__"

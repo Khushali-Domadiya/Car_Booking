@@ -288,5 +288,49 @@ def manage_contact(request):
     return render(request,'manage_contact.html',{'row':row,'data':data})
 
 def manage_user(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
     data = signup.objects.all()
-    return render(request,'manage_user.html',{'data':data})
+    return render(request,'manage_user.html',{'row':row,'data':data})
+
+def change_password_ad(request):
+    row = ''
+    msg = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    if 'save' in request.POST:
+        old_password = request.POST['old_password']
+        new_password = request.POST['new_password']
+        conf_password = request.POST['conf_password']
+        data = sign_up.objects.filter(password=old_password).all()
+        print(data)
+        msg = ''
+        if data.count() == 1:
+            if new_password == conf_password:
+                data.update(password=new_password)
+                return redirect('/myadmin/dashboard/')
+            else:
+                msg = 'New Password and confirm Password Doesnot match'
+        else:
+            msg = 'Invalid Old Password'
+    return render(request,'change_password_ad.html',{'row':row,'msg':msg})
+
+def search_car_admin(request):
+    row = ''
+    if 'admin_id' in request.session:
+        row = sign_up.objects.filter(id=request.session['admin_id']).first()
+    else:
+        return redirect('/myadmin/sign_in')
+    data = ''
+    if 'search' in request.POST:
+        search = request.POST['search']
+        data = car.objects.filter(name__contains = search).all()
+    return render(request,'search_car_admin.html',{'data':data,'row':row})
+
+def review_block(request):
+    return redirect()
