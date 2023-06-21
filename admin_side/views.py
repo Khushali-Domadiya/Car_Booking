@@ -332,5 +332,22 @@ def search_car_admin(request):
         data = car.objects.filter(name__contains = search).all()
     return render(request,'search_car_admin.html',{'data':data,'row':row})
 
-def review_block(request):
-    return redirect()
+def review_approve(request,app):
+    data = review.objects.filter(id=app).all()
+    data.update(status=1)
+    return redirect('/myadmin/manage_review')
+
+def review_disapprove(request,disapp):
+    data = review.objects.filter(id=disapp).all()
+    data.update(status=0)
+    return redirect('/myadmin/manage_review')
+
+def user_block(request,block):
+    data = signup.objects.filter(id=block).all()
+    data.update(status=1)
+    return redirect('/myadmin/manage_user')
+
+def user_unblock(request,unblock):
+    data = signup.objects.filter(id=unblock).all()
+    data.update(status=1)
+    return redirect('/myadmin/manage_user')
