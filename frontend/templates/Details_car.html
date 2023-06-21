@@ -1,0 +1,269 @@
+{% load static%}
+{% include 'header.html'%}
+
+    <!-- Page Header Start -->
+    <!-- <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Car Booking</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Car Booking</h6>
+        </div>
+    </div> -->
+    <!-- Page Header Start -->
+
+
+    <!-- Detail Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pt-5 pb-3">
+            {% for car in car_data%}
+                <h1 class="display-4 text-uppercase mb-5">{{car.name}}</h1>
+                <div class="row align-items-center pb-2">
+                    <div class="col-lg-6 mb-4">
+                        <img class="img-fluid" src="/media/{{car.image}}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <h4 class="mb-2">Rs.{{car.prize}}/Day</h4>
+                        <div class="d-flex mb-3">
+                            <h6 class="mr-2">Rating:</h6>
+                            <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star text-primary mr-1"></small>
+                                <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                                <small>(250)</small>
+                            </div>
+                        </div>
+                        <p>{{car.discription}}</p>
+                        <div class="d-flex pt-1">
+                            <h6>Share on:</h6>
+                            <div class="d-inline-flex">
+                                <a class="px-2" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="px-2" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="px-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="px-2" href=""><i class="fab fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-n3 mt-lg-0 pb-4">
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-car text-primary mr-2"></i>
+                        <span>Name : {{car.name}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-rupee-sign text-primary mr-2"></i>
+                        <span>Prize : {{car.prize}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-car-side text-primary mr-2"></i>
+                        <span>Category : {{car.category}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-car text-primary mr-2"></i>
+                        <span>Brand : {{car.car_brand}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-user text-primary mr-2"></i>
+                        <span>Person : {{car.person}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-music text-primary mr-2"></i>
+                        <span>Music : {{car.music}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-wind text-primary mr-2"></i>
+                        <!-- <i class="fa-solid fa-temperature-arrow-down text-primary mr-2"></i> -->
+                        <span>AC : {{car.ac}}</span>
+                    </div>
+                    <div class="col-md-3 col-6 mb-2">
+                        <i class="fa fa-gas-pump text-primary mr-2"></i>
+                        <span>Fuel : {{car.fuel}}</span>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+    <!-- Detail End -->
+
+
+    <!-- Car Booking Start -->
+    <div class="container-fluid pb-5">
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token%}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="mb-4">Personal Detail</h2>
+                        <div class="mb-5">
+                            <div class="row">
+                                <input type="hidden" value="{{car_id}}" name="car_id">
+                                {% for car in car_data%}
+                                    <input type="hidden" name="car_name" value="{{car.name}}" id="">
+                                {%endfor%}
+                                <div class="col-6 form-group">
+                                    <input type="text" name="fname" class="form-control p-4" placeholder="First Name"
+                                        required="required">
+                                </div>
+                                <div class="col-6 form-group">
+                                    <input type="text" name="lname" class="form-control p-4" placeholder="Last Name"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <input type="email" name="email" class="form-control p-4" placeholder="Your Email"
+                                        required="required">
+                                </div>
+                                <div class="col-6 form-group">
+                                    <input type="text" name="contact" class="form-control p-4" placeholder="Mobile Number"
+                                        required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="mb-4">Booking Detail</h2>
+                        <div class="mb-5">
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <select name="pick_up" class="custom-select px-4" style="height: 50px;">
+                                        <option selected>Pickup Location</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Gandhinagar">Gandhinagar</option>
+                                        <option value="Navsari">Navsari</option>
+                                        <option value="Vapi">Vapi</option>
+                                        <option value="Bharuch">Bharuch</option>
+                                        <option value="Amreli">Amreli</option>
+                                        <option value="Bhavanagar">Bhavanagar</option>
+                                        <option value="Dwarka">Dwarka</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <select name="drop" class="custom-select px-4" style="height: 50px;">
+                                        <option selected>Drop Location</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Gandhinagar">Gandhinagar</option>
+                                        <option value="Navsari">Navsari</option>
+                                        <option value="Vapi">Vapi</option>
+                                        <option value="Bharuch">Bharuch</option>
+                                        <option value="Amreli">Amreli</option>
+                                        <option value="Bhavanagar">Bhavanagar</option>
+                                        <option value="Dwarka">Dwarka</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <input type="text" name="pickup_date" class="form-control p-4 datetimepicker-input"
+                                            placeholder="Pickup Date" data-target="#date2" data-toggle="datetimepicker" />
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="time" id="time2" data-target-input="nearest">
+                                        <input type="text" name="drop_time" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time" data-target="#time2" data-toggle="datetimepicker" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <select name="adult" class="custom-select px-4" style="height: 50px;">
+                                        <option selected>Select Adult</option>
+                                        <option value="1">Adult 1</option>
+                                        <option value="2">Adult 2</option>
+                                        <option value="3">Adult 3</option>
+                                        <option value="4">Adult 4</option>
+                                        <option value="5">Adult 5</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <select name="child" class="custom-select px-4" style="height: 50px;">
+                                        <option selected>Select Child</option>
+                                        <option value="0">Child 0</option>
+                                        <option value="1">Child 1</option>
+                                        <option value="2">Child 2</option>
+                                        <option value="3">Child 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control py-3 px-4" name="request" rows="3" placeholder="Special Request"
+                                    required="required"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="bg-secondary p-5 mb-5">
+                            <h2 class="text-primary mb-4">Payment</h2>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" value="paypal" class="custom-control-input" name="payment" id="paypal">
+                                    <label class="custom-control-label" for="paypal">Paypal</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" value="direct_check" class="custom-control-input" name="payment"
+                                        id="directcheck">
+                                    <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" value="bank_transfer" class="custom-control-input" name="payment"
+                                        id="banktransfer">
+                                    <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                </div>
+                            </div>
+                            <input type="submit" value="Reserve Now" name="save" class="btn btn-block btn-primary py-3">
+                            <!-- <button class="btn btn-block btn-primary py-3">Reserve Now</button> -->
+                            {{msg}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Car Booking End -->
+
+    <!-- Car Booking Start -->
+    <div class="container-fluid pb-5">
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token%}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="mb-4">Your Review</h2>
+                        <div class="mb-5">
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <input type="text" name="name" class="form-control p-4" placeholder="First Name" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="email" name="email" class="form-control p-4" placeholder="Your Email" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="text" name="message" class="form-control p-4" placeholder="Message" required="required">
+                                </div>
+                                <div class="col-12 form-group">
+                                    <input type="file" name="image" class="form-control p-4" placeholder="Image" required="required">
+                                </div>
+                                <input type="submit" value="Submit" name="submit"  class="btn btn-block btn-primary py-3 col-2">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Car Comment REview -->
+
+{% include 'footer.html'%}
+
+</html>

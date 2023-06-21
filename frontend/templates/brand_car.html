@@ -1,0 +1,48 @@
+{% load static%}
+{% include 'header.html'%}
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">All Brand Car</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="/">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">All Brand Car</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
+            <div class="row">
+                {% for car in car_data%}
+                    <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        <img class="img-fluid mb-4" src="/media/{{car.image}}" alt="">
+                        <h4 class="text-uppercase mb-4">{{car.name}}</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="px-2">
+                                <i class="fa fa-user text-primary mr-1"></i>
+                                <span>{{car.person}}</span>
+                            </div>
+                            <div class="px-2 border-left border-right">
+                                <i class="fa fa-gas-pump text-primary mr-1"></i>
+                                <span>{{car.fuel}}</span>
+                            </div>
+                            <div class="px-2">
+                                <i class="fa fa-music text-primary mr-1"></i>
+                                <span>{{car.music}}</span>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary px-3" href="/details_car/{{car.id}}">Rs.{{car.prize}}/Day</a>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+    <!-- Rent A Car End -->
+    {% include 'footer.html'%}
+</html>
