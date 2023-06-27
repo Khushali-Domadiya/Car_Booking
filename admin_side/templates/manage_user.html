@@ -11,7 +11,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Image</th>
-                                <!-- <th scope="col">Action</th> -->
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -21,10 +21,10 @@
                                     <td>{{i.name}}</td>
                                     <td>{{i.email}}</td>
                                     <td><img src="/media/{{i.image}}" alt="" height="100px" width="100px"></td>
-                                    <!-- <td>
-                                        <a href="/myadmin/review_block/{{i.id}}">Block</a> ||
-                                        <a href="/myadmin/review_unblock/{{i.id}}">Unblock</a>
-                                    </td> -->
+                                    <td>
+                                        <a href="/myadmin/user_block/{{i.id}}">Block</a> ||
+                                        <a href="/myadmin/user_unblock/{{i.id}}">Unblock</a>
+                                    </td>
                                 </tr>
                             {%endfor%}
                         </tbody>

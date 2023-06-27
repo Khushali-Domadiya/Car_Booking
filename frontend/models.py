@@ -8,12 +8,13 @@ class signup(models.Model):
     email = models.CharField(max_length=50)
     contact = models.BigIntegerField()
     password = models.CharField(max_length=20)
+    status = models.IntegerField(default=0)
     image = models.FileField(upload_to='./signup_web',default='')
 
 class SIGNUP(ModelForm):
     class Meta:
         model = signup
-        fields = ['name','email','contact','password','image']
+        fields = ['name','email','contact','password','status','image']
 
 class contact(models.Model):
     name = models.CharField(max_length=50)
@@ -52,6 +53,7 @@ class review(models.Model):
     email = models.CharField(max_length=150)
     message = models.CharField(max_length=500)
     profession = models.CharField(max_length=100)
+    status = models.IntegerField(default=0)
     image = models.FileField(upload_to='./review_image',default='')
 
 class REVIEW(ModelForm):

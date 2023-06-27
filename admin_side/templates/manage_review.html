@@ -23,10 +23,10 @@
                                     <td>{{i.email}}</td>
                                     <td>{{i.message}}</td>
                                     <td><img src="/media/{{i.image}}" alt="" height="100px" width="100px"></td>
-                                    <!-- <td>
-                                        <a href="/myadmin/review_block/{{i.id}}">Block</a> ||
-                                        <a href="/myadmin/review_unblock/{{i.id}}">Unblock</a>
-                                    </td> -->
+                                    <td>
+                                        <a href="/myadmin/review_approve/{{i.id}}">Approve</a> ||
+                                        <a href="/myadmin/review_disapprove/{{i.id}}">Disapprove</a>
+                                    </td>
                                 </tr>
                             {%endfor%}
                         </tbody>
