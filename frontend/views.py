@@ -26,12 +26,9 @@ def home(request):
     all_car = car.objects.all()
     tem = team.objects.all()
     brd = brand.objects.all()
-    all_review = review.objects.all()
-    # if 'search' in request.POST:
-        # search = request.POST['search']
-        # data = car.objects.filter(name__contains=search).all()
-        
-    return render(request,'index.html',{'row':row,'msg':msg,'sld':sld,'all_car':all_car,'tem':tem,'brd':brd,'all_review':all_review})
+    rev = review.objects.all()
+    all_review = review.objects.filter(status=1).all()
+    return render(request,'index.html',{'row':row,'msg':msg,'sld':sld,'all_car':all_car,'tem':tem,'brd':brd,'all_review':all_review,'rev':rev})
 
 def about(request):
     row = ''
