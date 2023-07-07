@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zeb+wpnjlouwyy3fw*ke-m(+u+eija&5(x%c2#3*x3(bkch^@)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['carbook.pythonanywhere.com']
 
 
 # Application definition
