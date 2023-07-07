@@ -25,10 +25,10 @@ def home(request):
     sld = slide.objects.all()
     all_car = car.objects.all()
     tem = team.objects.all()
-    brd = brand.objects.all()
-    rev = review.objects.all()
+    brd = brand.objects.all()    
+    car_pick = car.objects.order_by('id').all()[:6]
     all_review = review.objects.filter(status=1).all()
-    return render(request,'index.html',{'row':row,'msg':msg,'sld':sld,'all_car':all_car,'tem':tem,'brd':brd,'all_review':all_review,'rev':rev})
+    return render(request,'index.html',{'row':row,'msg':msg,'sld':sld,'all_car':all_car,'tem':tem,'brd':brd,'all_review':all_review,'car_pick':car_pick})
 
 def about(request):
     row = ''
@@ -36,6 +36,7 @@ def about(request):
         row = signup.objects.filter(id=request.session['user_id']).get()
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'about.html',{'row':row,'all_car':all_car,'brd':brd})
 
 def service(request):
@@ -43,6 +44,7 @@ def service(request):
     if 'user_id' in request.session:
         row = signup.objects.filter(id=request.session['user_id']).get()
     all_car = car.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'service.html',{'row':row,'all_car':all_car})
 
 def contact_fe(request):
@@ -63,6 +65,7 @@ def contact_fe(request):
             msg = 'Mail Sent Successfully'
         else:
             msg = 'Something Went Wrong'
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'contact.html',{'row':row,'all_car':all_car,'brd':brd,'msg':msg})
 
 def car_listing(request):
@@ -71,6 +74,8 @@ def car_listing(request):
         row = signup.objects.filter(id=request.session['user_id']).get()
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
+
     return render(request,'car_listing.html',{'row':row,'all_car':all_car,'brd':brd})
 
 def car_detail(request):
@@ -81,6 +86,8 @@ def car_detail(request):
     car_det = car.objects.order_by('-id').all()[:1]
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
+
     return render(request,'car_detail.html',{'row':row,'all_car':all_car,'brd':brd,'car_det':car_det})
 
 def car_booking(request):
@@ -90,6 +97,8 @@ def car_booking(request):
     all_car = car.objects.all()
     brd = brand.objects.all()
     car_data = car.objects.order_by('-id').all()[:1]
+    car_pick = car.objects.order_by('id').all()[:6]
+
     return render(request,'car_booking.html',{'row':row,'all_car':all_car,'brd':brd,'car_data':car_data})
 
 def car_team(request):
@@ -99,6 +108,7 @@ def car_team(request):
     all_car = car.objects.all()
     brd = brand.objects.all()
     all_team = team.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'our_team.html',{'row':row,'all_car':all_car,'brd':brd,'all_team':all_team})
 
 def testimonial(request):
@@ -134,6 +144,7 @@ def registration(request):
                 msg = 'something Went Wrong'
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'registration.html',{'msg':msg,'all_car':all_car,'brd':brd,'row':row})
 
 def log_in(request):
@@ -164,6 +175,7 @@ def log_in(request):
             msg = 'Please Enter Valid Email Or Password'
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'log_in.html',{'msg':msg,'all_car':all_car,'brd':brd,'row':row})
 
 def log_out(request):
@@ -180,6 +192,7 @@ def edit_profile(request):
         frm.save()
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'registration.html',{'data':data,'all_car':all_car,'brd':brd,'row':row})
 
 def send_mail_for_otp(request):
@@ -205,6 +218,7 @@ def send_mail_for_otp(request):
                 msg = 'Mail Couldnot SenT'
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'send_mail.html',{'msg':msg,'all_car':all_car,'brd':brd,'row':row})
 
 def confirm_otp(request):
@@ -221,6 +235,7 @@ def confirm_otp(request):
             msg = 'Please Enter Valid OTP'
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'confirm_otp.html',{'msg':msg,'all_car':all_car,'brd':brd,'row':row})
 
 def forget_password(request):
@@ -235,6 +250,7 @@ def forget_password(request):
         data_pswd.update(password=new_password)
     all_car = car.objects.all()
     brd = brand.objects.all()
+    car_pick = car.objects.order_by('id').all()[:6]
     return render(request,'forget_password.html',{'all_car':all_car,'brd':brd,'row':row})
 
 def details_car(request,car_id):
@@ -265,7 +281,8 @@ def details_car(request,car_id):
     if 'submit' in request.POST:
         frm = REVIEW(request.POST,request.FILES)
         frm.save()
-    return render(request,'Details_car.html',{'car_data':car_data,'brd':brd,'msg':msg,'car_id':car_id,'row':row})
+    car_pick = car.objects.order_by('id').all()[:6]
+    return render(request,'Details_car.html',{'car_data':car_data,'brd':brd,'msg':msg,'car_id':car_id,'row':row,'car_pick':car_pick})
 
 def search_car(request):
     row = ''
@@ -279,14 +296,8 @@ def search_car(request):
     msg = 'No Data Shown'
     all_car = car.objects.all()
     brd = brand.objects.all()
-    # if 'check' in request.POST:
-    #     pickup_date = request.POST['pickup_date']
-    #     pickup_time = request.POST['pickup_time']
-        # car_name = request.POST['car_name']
-        # car_data = car.objects.filter(id=car_name).all()
-        # if pickup_time == pickup_time:
-        #     return redirect('/')
-    return render(request,'search_car.html',{'car_data':car_data,'all_car':all_car,'msg':msg,'brd':brd,'same_car':same_car,'row':row})
+    car_pick = car.objects.order_by('id').all()[:6]
+    return render(request,'search_car.html',{'car_data':car_data,'all_car':all_car,'msg':msg,'brd':brd,'same_car':same_car,'row':row,'car_pick':car_pick})
 
 def brand_car(request,brand_id):
     row = ''
@@ -295,7 +306,8 @@ def brand_car(request,brand_id):
     car_data = car.objects.filter(car_brand_id=brand_id).all()
     brd = brand.objects.all()
     all_car = car.objects.all()
-    return render(request,'brand_car.html',{'car_data':car_data,'brd':brd,'all_car':all_car,'row':row})
+    car_pick = car.objects.order_by('id').all()[:6]
+    return render(request,'brand_car.html',{'car_data':car_data,'brd':brd,'all_car':all_car,'row':row,'car_pick':car_pick})
 
 def change_password(request):
     row = ''
@@ -317,4 +329,5 @@ def change_password(request):
         else:
             msg = 'Invalid Old Password'
     brd = brand.objects.all()
-    return render(request,'change_password.html',{'row':row,'msg':msg,'brd':brd})
+    car_pick = car.objects.order_by('id').all()[:6]
+    return render(request,'change_password.html',{'row':row,'msg':msg,'brd':brd,'car_pick':car_pick})
